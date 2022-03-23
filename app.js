@@ -30,80 +30,53 @@ buttonLeftElem.addEventListener('click', function (e) {
 	displayCards();
 });
 
-function displayCards(cards) {
-	containerElem.innerHTML = '<div class="card">';
-	cards.forEach((card) => {
-		containerElem.innerHTML += `
-<div class="card-front">
-	<p>${card.front}</p>
-</div>
-<div class="card-back none">
-	<p>${card.back}</p>
-</div>
-`;
-	});
-	containerElem.innerHTML += '</div>';
-	const frontCards = document.querySelectorAll('.card-front')
-	const backCards = document.querySelectorAll('.card-back')
-
-	frontCards.forEach(frontCard => {
-		frontCard.addEventListener('click', function (e) {
-			frontCard.classList.add('none')
-			backCards[currentCardIndex].classList.remove('none')
-		});
-	});
-
-	backCards.forEach(backCard => {
-		backCard.addEventListener('click', function (e) {
-			backCard.classList.add('none')
-			frontCards[currentCardIndex].classList.remove('none')
-		});
-	});
-
-	currentEl.innerHTML = `${currentCardIndex + 1}/${cards.length} `
-};
-
-
+// ADD BUTTON
 addButton.addEventListener('click', function (e) {
 	cards.push({
 		front: frontText.value,
 		back: backText.value,
 	});
-
 	displayCards(cards);
-	updateCurrentIndex();
-	//addCardsToStorage(cards)
-	frontText.value = ''
-	backText.value = ''
 });
 
-/*
-function getCardsFromStorage() {
-  let words;
-  if (localStorage.getItem("cards") === null) {
-	words = [];
-  } else {
-	words = JSON.parse(localStorage.getItem("cards"));
-  }
-  return words;
-}
-
-function addCardsToStorage(cards) {
-  let words = getCardsFromStorage();
-  words.push(cards);
-  localStorage.setItem("cards", JSON.stringify(words));
-}
-
-//add card from local storage to ui-----------------------
-function loadAllCardsToUI() {
-  let words = getCardsFromStorage();
-  console.log(words[words.length - 1]);
-  displayCards(words[words.length - 1]);
-}
-*/
-
+// CLEAR BUTTON
 clearBtn.addEventListener('click', () => {
 	localStorage.clear();
 	containerElem.innerHTML = '';
 	window.location.reload();
 });
+
+// DISPLAY CARDS
+function displayCards(cards) {
+	containerElem.innerHTML = '<div class="card">';
+	containerElem.innerHTML += 'okok';
+// 	cards.forEach((card) => {
+// 		containerElem.innerHTML += `
+// <div class="card-front">
+// 	<p>${card.front}</p>
+// </div>
+// <div class="card-back none">
+// 	<p>${card.back}</p>
+// </div>
+// `;
+// 	});
+	containerElem.innerHTML += '</div>';
+	const frontCards = document.querySelectorAll('.card-front')
+	const backCards = document.querySelectorAll('.card-back')
+
+	frontCards.forEach((frontCard, index) => {
+		frontCard.addEventListener('click', (e) => {
+			frontCard.classList.add('none');
+			backCards[index].classList.remove('none');
+		});
+	});
+
+	backCards.forEach((backCard,index) => {
+		backCard.addEventListener('click', (e) => {
+			backCard.classList.add('none');
+			frontCards[currentCardIndex].classList.remove('none');
+		});
+	});
+
+	currentEl.innerHTML = `${currentCardIndex + 1}/${cards.length} `
+};
