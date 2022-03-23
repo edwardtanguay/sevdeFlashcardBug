@@ -141,9 +141,6 @@ body .container .cards-container {
 }
 
 body .container .cards-container .card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   text-align: center;
   -webkit-box-align: center;
       -ms-flex-align: center;

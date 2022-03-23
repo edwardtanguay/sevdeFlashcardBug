@@ -37,6 +37,8 @@ addButton.addEventListener('click', function (e) {
 		back: backText.value,
 	});
 	displayCards(cards);
+	frontText.value = '';
+	backText.value = '';
 });
 
 // CLEAR BUTTON
@@ -48,19 +50,20 @@ clearBtn.addEventListener('click', () => {
 
 // DISPLAY CARDS
 function displayCards(cards) {
-	containerElem.innerHTML = '<div class="card">';
-	containerElem.innerHTML += 'okok';
-// 	cards.forEach((card) => {
-// 		containerElem.innerHTML += `
-// <div class="card-front">
-// 	<p>${card.front}</p>
-// </div>
-// <div class="card-back none">
-// 	<p>${card.back}</p>
-// </div>
-// `;
-// 	});
-	containerElem.innerHTML += '</div>';
+	console.log(cards);
+	containerElem.innerHTML = `<div class="card">
+	${cards.map((card) => {
+		return `
+<div class="card-front">
+	<p>${card.front}</p>
+</div>
+<div class="card-back none">
+	<p>${card.back}</p>
+</div>
+`;
+	}).join('')}
+</div>	
+`;
 	const frontCards = document.querySelectorAll('.card-front')
 	const backCards = document.querySelectorAll('.card-back')
 
@@ -71,7 +74,7 @@ function displayCards(cards) {
 		});
 	});
 
-	backCards.forEach((backCard,index) => {
+	backCards.forEach((backCard, index) => {
 		backCard.addEventListener('click', (e) => {
 			backCard.classList.add('none');
 			frontCards[currentCardIndex].classList.remove('none');
