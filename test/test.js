@@ -28,10 +28,13 @@ ${flashcards.map(flashcard => {
 
 const flashcardFrontElems = document.querySelectorAll('.front');
 const flashcardBackElems = document.querySelectorAll('.back');
-flashcardFrontElems.forEach((m, index) => m.addEventListener('click', (e) => {
-	if (flashcardBackElems[index].style.display === 'none') {
-		flashcardBackElems[index].style.display = 'block';
-	} else {
-		flashcardBackElems[index].style.display = 'none';
-	}
-}));	
+flashcardFrontElems.forEach((m, index) => {
+	flashcardBackElems[index].style.display = 'none';
+	m.addEventListener('click', (e) => {
+		if (flashcardBackElems[index].style.display === 'none') {
+			flashcardBackElems[index].style.display = 'block';
+		} else {
+			flashcardBackElems[index].style.display = 'none';
+		}
+	})
+});	
