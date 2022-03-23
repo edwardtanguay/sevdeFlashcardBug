@@ -1,0 +1,19 @@
+	containerElem.children[currentCardIndex].classList.add('show');
+	if (currentCardIndex.length > 1) {
+		containerElem.children[currentCardIndex - 1].classList.remove('show');
+	}
+
+	updateCurrentIndex();
+
+
+	if (currentCardIndex.length > 1) { // added
+		containerElem.children[currentCardIndex + 1].classList.remove('show')
+	}
+	containerElem.children[currentCardIndex].classList.add('show')
+
+	updateCurrentIndex();
+
+		containerElem.children[0].className = 'inner-card show'
+		if (cards.length > 1 && currentCardIndex > 0) {
+			containerElem.children[0].className = 'inner-card'
+		}
