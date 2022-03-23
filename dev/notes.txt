@@ -2,3 +2,4 @@
 
 - rename all element variables
 - arrow functions
+- if empty dont' add

@@ -36,7 +36,7 @@ addButton.addEventListener('click', function (e) {
 		front: frontText.value,
 		back: backText.value,
 	});
-	displayCards(cards);
+	displayCards();
 	frontText.value = '';
 	backText.value = '';
 });
@@ -49,37 +49,44 @@ clearBtn.addEventListener('click', () => {
 });
 
 // DISPLAY CARDS
-function displayCards(cards) {
-	console.log(cards);
-	containerElem.innerHTML = `<div class="card">
+function displayCards() {
+
+	// add all cards into container
+	containerElem.innerHTML = `
 	${cards.map((card) => {
 		return `
-<div class="card-front">
-	<p>${card.front}</p>
-</div>
-<div class="card-back none">
-	<p>${card.back}</p>
-</div>
-`;
-	}).join('')}
+<div class="card">
+	<div class="card-front">
+		<p>${card.front}</p>
+	</div>
+	<div class="card-back none">
+		<p>${card.back}</p>
+	</div>
 </div>	
 `;
-	const frontCards = document.querySelectorAll('.card-front')
-	const backCards = document.querySelectorAll('.card-back')
+	}).join('')}
+`;
 
-	frontCards.forEach((frontCard, index) => {
+	// add event handlers to front and back of cards
+	const frontCardElems = document.querySelectorAll('.card-front')
+	const backCardElems = document.querySelectorAll('.card-back')
+	frontCardElems.forEach((frontCard, index) => {
 		frontCard.addEventListener('click', (e) => {
 			frontCard.classList.add('none');
-			backCards[index].classList.remove('none');
+			backCardElems[index].classList.remove('none');
+		});
+	});
+	backCardElems.forEach((backCard, index) => {
+		backCard.addEventListener('click', (e) => {
+			backCard.classList.add('none');
+			frontCardElems[currentCardIndex].classList.remove('none');
 		});
 	});
 
-	backCards.forEach((backCard, index) => {
-		backCard.addEventListener('click', (e) => {
-			backCard.classList.add('none');
-			frontCards[currentCardIndex].classList.remove('none');
-		});
-	});
+	// hide all cards except current card
+	const cardElems = document.querySelectorAll('.card');
+	cardElems.forEach(cardElem => cardElem.style.display = 'none');
+	Array.from(cardElems)[currentCardIndex].style.display = 'block';
 
 	currentEl.innerHTML = `${currentCardIndex + 1}/${cards.length} `
 };
